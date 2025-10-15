@@ -122,7 +122,7 @@ const save = async () => {
   isLoading.value = true;
   try {
     const { error } = await supabase
-      .from("transactions")
+      .from("transaction")
       .upsert({ ...state.value });
 
     if (!error) {
