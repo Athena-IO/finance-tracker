@@ -77,6 +77,7 @@
 import { useSelectedTimePeriod } from "~/composables/useSelectedTimePeriod";
 import { transactionViewOptions } from "~/constants";
 import { useFetchTransaction } from "~/composables/useFetchTransaction";
+import { promise } from "zod";
 
 const selectedView = ref(transactionViewOptions[1]);
 const isOpen = ref(false);
@@ -95,10 +96,11 @@ const {
 } = useFetchTransaction(current);
 
 const {
+  refresh: refreshPrevious,
   transactions: {
     incomeTotal: prevIncomeTotal,
     expenseTotal: prevExpenseTotal,
   },
 } = useFetchTransaction(previous);
-await refresh();
+await Promise.all([refresh(), refreshPrevious()]);
 </script>
