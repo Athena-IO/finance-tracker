@@ -40,11 +40,13 @@
 </template>
 
 <script setup>
+import { useAppToast } from "~/composables/useAppToast";
+
 const success = ref(false);
 const email = ref("");
 const pending = ref(false);
 
-const toast = useToast();
+const toast = useAppToast();
 const supabase = useSupabaseClient();
 useRedirectIfAuthenticated();
 
@@ -60,22 +62,13 @@ const handleLogin = async () => {
     });
 
     if (error) {
-      toast.add({
+      toast.toastError({
         title: "Error authenticating",
-        icon: "i-heroicons-exclamation-circle",
         description: error.message,
-        color: "red",
       });
     } else {
       success.value = true;
     }
-  } catch (err) {
-    console.error(err);
-    toast.add({
-      title: "Unexpected error",
-      description: err.message,
-      color: "red",
-    });
   } finally {
     pending.value = false;
   }

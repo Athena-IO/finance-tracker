@@ -34,6 +34,8 @@
 </template>
 
 <script setup>
+import { useAppToast } from "~/composables/useAppToast";
+
 const props = defineProps({
   transaction: Object,
 });
@@ -49,7 +51,7 @@ const iconColor = computed(() =>
 );
 const isLoading = ref(false);
 
-const toast = useToast();
+const toast = useAppToast();
 const supabase = useSupabaseClient();
 
 const deleteTransaction = async () => {
@@ -57,20 +59,16 @@ const deleteTransaction = async () => {
   try {
     await supabase.from("transaction").delete().eq("id", props.transaction.id);
 
-    toast.add({
+    toast.toastSuccess({
       title: "Transaction deleted",
       description: "The transaction was successfully removed.",
-      icon: "i-heroicons-check-circle",
-      color: "success",
     });
 
     emit("deleted", props.transaction.id);
   } catch (error) {
-    toast.add({
+    toast.toastError({
       title: "Failed to delete transaction",
       description: error.message,
-      icon: "i-heroicons-exclamation-circle",
-      color: "error",
     });
   } finally {
     isLoading.value = false;

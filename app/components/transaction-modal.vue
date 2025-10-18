@@ -70,13 +70,13 @@
 <script setup>
 import { categories, types } from "~/constants";
 import { z } from "zod";
-import { useToast } from "#imports";
 import { useSupabaseClient } from "#imports";
+import { useAppToast } from "~/composables/useAppToast";
 
 const props = defineProps({ modelValue: Boolean });
 const emit = defineEmits(["update:modelValue", "saved"]);
 const supabase = useSupabaseClient();
-const toast = useToast();
+const toast = useAppToast();
 
 const initialState = {
   type: undefined,
@@ -126,9 +126,8 @@ const save = async () => {
       .upsert({ ...state.value });
 
     if (!error) {
-      toast.add({
+      toast.toastSuccess({
         title: "Transaction saved",
-        icon: "i-heroicons-check-circle",
       });
       isOpen.value = false;
       emit("saved");
@@ -137,11 +136,9 @@ const save = async () => {
 
     throw error;
   } catch (e) {
-    toast.add({
+    toast.toastError({
       title: "Transaction not saved",
       description: e.message,
-      icon: "i-heroicons-exclamation-circle",
-      color: "red",
     });
   } finally {
     isLoading.value = false;
