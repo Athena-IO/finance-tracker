@@ -1,15 +1,15 @@
 <template>
   <UForm :state="state" :schema="schema" @submit.prevent="saveSettings">
-    <UFormGroup
+    <UFormField
       label="Transaction View"
       class="mb-4"
       help="Choose how you would like to view transactions"
     >
       <USelect
         v-model="state.transactionView"
-        :options="transactionViewOptions"
+        :items="transactionViewOptions"
       />
-    </UFormGroup>
+    </UFormField>
 
     <UButton
       type="submit"
@@ -24,15 +24,11 @@
 
 <script setup>
 import { z } from "zod";
-
 import { transactionViewOptions } from "~/constants";
 
 const supabase = useSupabaseClient();
-
 const user = useSupabaseUser();
-
 const { toastSuccess, toastError } = useAppToast();
-
 const pending = ref(false);
 
 const state = ref({
@@ -46,23 +42,24 @@ const schema = z.object({
 
 const saveSettings = async () => {
   pending.value = true;
-
   try {
     const { error } = await supabase.auth.updateUser({
-      data: {
-        transaction_view: state.value.transactionView,
-      },
+      data: { transaction_view: state.value.transactionView },
     });
-
     if (error) throw error;
 
-    toastSuccess({
-      title: "Settings updated",
-    });
+    await supabase.auth.refreshSession();
+
+    const { data: refreshedUser, error: refreshError } =
+      await supabase.auth.getUser();
+    if (refreshError) throw refreshError;
+
+    user.value = refreshedUser.user;
+
+    toastSuccess({ title: "Settings updated" });
   } catch (error) {
     toastError({
       title: "Error updating settings",
-
       description: error.message,
     });
   } finally {
