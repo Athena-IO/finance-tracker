@@ -78,8 +78,12 @@ import { useSelectedTimePeriod } from "~/composables/useSelectedTimePeriod";
 import { transactionViewOptions } from "~/constants";
 import { useFetchTransaction } from "~/composables/useFetchTransaction";
 import { promise } from "zod";
+const user = useSupabaseUser();
 
-const selectedView = ref(transactionViewOptions[1]);
+const selectedView = ref(
+  user.value.user_metadata?.transaction_view ?? transactionViewOptions[1]
+);
+
 const isOpen = ref(false);
 const { previous, current } = useSelectedTimePeriod(selectedView);
 
