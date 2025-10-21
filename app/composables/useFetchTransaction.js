@@ -54,7 +54,7 @@ export const useFetchTransaction = (period) => {
   const transactionsGroupedByDate = computed(() => {
     const grouped = {};
     for (const t of transactions.value) {
-      const date = new Date(t.created_at).toISOString().split("T")[0];
+      const date = t.created_at.split("T")[0];
       if (!grouped[date]) grouped[date] = [];
       grouped[date].push(t);
     }

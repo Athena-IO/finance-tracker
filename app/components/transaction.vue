@@ -27,6 +27,11 @@
             trailing-icon="i-heroicons-ellipsis-horizontal"
             :loading="isLoading"
           />
+          <TransactionModal
+            v-model="isOpen"
+            :transaction="transaction"
+            @saved="emit('edited')"
+          />
         </UDropdownMenu>
       </div>
     </div>
@@ -39,7 +44,7 @@ import { useAppToast } from "~/composables/useAppToast";
 const props = defineProps({
   transaction: Object,
 });
-const emit = defineEmits(["deleted"]);
+const emit = defineEmits(["deleted", "edited"]);
 
 const { currency } = useCurrency(props.transaction.amount);
 const isIncome = computed(() => props.transaction.type == "income");
@@ -50,7 +55,7 @@ const iconColor = computed(() =>
   isIncome.value ? "text-green-600" : "text-red-600"
 );
 const isLoading = ref(false);
-
+const isOpen = ref(false);
 const toast = useAppToast();
 const supabase = useSupabaseClient();
 
@@ -80,7 +85,9 @@ const items = [
     {
       label: "Edit",
       icon: "i-heroicons-pencil-square-20-solid",
-      onClick: () => console.log("Edit clicked"),
+      onClick: () => {
+        isOpen.value = true;
+      },
     },
     {
       label: "Delete",
