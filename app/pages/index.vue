@@ -26,15 +26,15 @@
     <Trend
       color="green"
       title="Investments"
-      :amount="4000"
-      :last-amount="3000"
+      :amount="investmentTotal"
+      :last-amount="previnvestmentSavingTotal"
       :loading="pending"
     />
     <Trend
       color="red"
       title="Saving"
-      :amount="4000"
-      :last-amount="4100"
+      :amount="savingTotal"
+      :last-amount="prevSavingTotal"
       :loading="pending"
     />
   </section>
@@ -96,6 +96,8 @@ const {
     expenseCount,
     incomeTotal,
     expenseTotal,
+    savingTotal,
+    investmentTotal,
     grouped: { byDate },
   },
 } = useFetchTransaction(current);
@@ -105,6 +107,8 @@ const {
   transactions: {
     incomeTotal: prevIncomeTotal,
     expenseTotal: prevExpenseTotal,
+    savingTotal: prevSavingTotal,
+    investmentTotal: previnvestmentSavingTotal,
   },
 } = useFetchTransaction(previous);
 await Promise.all([refresh(), refreshPrevious()]);

@@ -45,6 +45,7 @@ import { useAppToast } from "~/composables/useAppToast";
 const success = ref(false);
 const email = ref("");
 const pending = ref(false);
+const redirectUrl = useRuntimeConfig().public.baseUrl;
 
 const toast = useAppToast();
 const supabase = useSupabaseClient();
@@ -57,7 +58,7 @@ const handleLogin = async () => {
     const { error } = await supabase.auth.signInWithOtp({
       email: email.value,
       options: {
-        emailRedirectTo: "http://localhost:3000/confirm",
+        emailRedirectTo: `${redirectUrl}/confirm`,
       },
     });
 
