@@ -1,75 +1,80 @@
-# Nuxt Minimal Starter
+```markdown
+# 💰 Finance Tracker AIO
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+A modern **Finance Tracker Web App** that helps you easily manage your **income, expenses, savings,** and **investments** — all in one place.  
+Built for simplicity, clarity, and control over your financial life.
 
-## Setup
+---
 
-Make sure to install dependencies:
+## 🌐 Live Demo
+👉 [Visit the website](https://finance-tracker-aio.vercel.app)
+
+---
+
+## ✨ Features
+
+- 📊 **Track Transactions** — Add, edit, or delete your daily transactions  
+- 💸 **Categories** — Manage income, expenses, savings, and investments  
+- 📅 **Filters** — View transactions **daily**, **monthly**, or **yearly**  
+- 👤 **User Dashboard** — Manage your profile, preferences, and settings  
+- ☁️ **Cloud Sync** — All data stored securely in your Supabase account  
+- ⚡ **Fast & Responsive** — Works perfectly on mobile and desktop  
+
+---
+
+## 🧠 Tech Stack
+
+- 🖥️ **Frontend:** Nuxt 3, Vue 3, TailwindCSS  
+- 🔐 **Backend & Auth:** Supabase  
+- ⚙️ **Deployment:** Vercel  
+
+---
+
+## 🚀 Getting Started
+
+Clone the repository and run locally:
 
 ```bash
-# npm
+# Clone this repo
+git clone https://github.com/your-username/finance-tracker-aio.git
+
+# Navigate to project folder
+cd finance-tracker-aio
+
+# Install dependencies
 npm install
 
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
+# Run the development server
 npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
-## Production
+---
 
-Build the application for production:
+## 🤝 Contributing
+
+We welcome contributions! Whether it's improving UI, fixing bugs, or adding new features —  
+feel free to fork the repo and make a pull request.
 
 ```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
+# Ready to collaborate?
+git checkout -b feature/your-feature-name
+# Make your changes and commit
+git commit -m "Add new feature"
+# Push and open a pull request
+git push origin feature/your-feature-name
 ```
 
-Locally preview production build:
+---
 
-```bash
-# npm
-npm run preview
+## 🧑‍💻 Author
+Developed with ❤️ by [AthenaIO]
 
-# pnpm
-pnpm preview
+---
 
-# yarn
-yarn preview
+## 📄 License
+This project is licensed under the **MIT License**.
 
-# bun
-bun run preview
+---
+
+> 💡 _Track smarter. Spend wiser. Save more._
 ```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
